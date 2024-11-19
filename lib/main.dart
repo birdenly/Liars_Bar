@@ -60,13 +60,50 @@ class _PlayerInputScreenState extends State<PlayerInputScreen> {
     }
   }
 
+  void _showRandomCard() {
+    final List<String> cards = ['Queen', 'King', 'Ace'];
+    final String selectedCard = (cards..shuffle()).first;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Carta da Mesa:'),
+          content: Text(
+            selectedCard,
+            style: const TextStyle(fontSize: 25),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Tela de jogadores'),
-        ),
+        title: Center(
+            child: Row(
+          children: [
+            const Text('Tela de jogadores'),
+            ButtonBar(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.casino),
+                  onPressed: _showRandomCard,
+                ),
+              ],
+            )
+          ],
+        )),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,7 +121,7 @@ class _PlayerInputScreenState extends State<PlayerInputScreen> {
                   Text('Jogadores: $_playerCount',
                       style: const TextStyle(fontSize: 18)),
                   IconButton(
-                    icon: Icon(Icons.add, color: Colors.green),
+                    icon: const Icon(Icons.add, color: Colors.green),
                     onPressed: _incrementPlayerCount,
                   ),
                 ],
