@@ -61,7 +61,7 @@ class _PlayerInputScreenState extends State<PlayerInputScreen> {
   }
 
   void _showRandomCard() {
-    final List<String> cards = ['Queen', 'King', 'Ace'];
+    final List<String> cards = ['7s', '8s', '9s'];
     final String selectedCard = (cards..shuffle()).first;
 
     showDialog(
